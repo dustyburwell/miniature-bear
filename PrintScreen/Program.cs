@@ -23,12 +23,23 @@ namespace PrintScreen
             Icon = new Icon("appicon.ico")
          };
 
+         icon.ContextMenu = new ContextMenu(
+            new [] {
+               new MenuItem("E&xit", ExitClicked)
+            });
+
          context = new WindowsFormsSynchronizationContext();
 
          HotKeyManager.RegisterHotKey(Keys.PrintScreen, 0);
          HotKeyManager.HotKeyPressed += HotKeyManager_HotKeyPressed;
 
          Application.Run(new ApplicationContext());
+      }
+
+      private static void ExitClicked(object sender, EventArgs args)
+      {
+         icon.Dispose();
+         Application.Exit();
       }
 
       private static void HotKeyManager_HotKeyPressed(object sender, HotKeyEventArgs e)
