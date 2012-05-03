@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" 
+            Name="Miniature Bear"
+            Language="1033" 
+            Version="0.1.0.0"
+            Manufacturer="Dusty Burwell" 
+            UpgradeCode="5c9d9a97-e10f-4f77-b60f-fef566e8e270">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes"/>
+
+      <Property Id="ARPPRODUCTICON" Value="appicon.ico"/>
+      <Property Id="ARPREADME" Value="http://github.com/dustyburwell/miniature-bear"/>
+
+      <Icon Id="appicon.ico" SourceFile="$(var.PrintScreen.TargetDir)appicon.ico" />
+      
+      <Directory Id="TARGETDIR" Name="SourceDir">
+         <Directory Id="ProgramFilesFolder">
+            <Directory Id="INSTALLFOLDER" Name="Miniature Bear" />
+         </Directory>
+      </Directory>
+      
+		<Feature Id="ProductFeature" Title="PrintScreenSetup" Level="1">
+			<ComponentGroupRef Id="PrintScreenComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<ComponentGroup Id="PrintScreenComponents" Directory="INSTALLFOLDER">
+         <ComponentRef Id="C.PrintScreen.exe"/>
+         <ComponentRef Id="C.appicon.ico"/>
+         <ComponentRef Id="C.PrintScreenAutoStart"/>
+		</ComponentGroup>
+
+      <DirectoryRef Id="INSTALLFOLDER">
+         <Component Id="C.PrintScreen.exe" Guid="9591129E-94E2-11E1-9794-8D776188709B">
+            <File Id="F.PrintScreen.exe"
+                  Source="$(var.PrintScreen.TargetPath)"
+                  KeyPath="yes"/>
+         </Component>
+         <Component Id="C.appicon.ico" Guid="E95AEA0C-94E3-11E1-8FB2-96786188709B">
+            <File Id="F.appicon.ico"
+                  Source="$(var.PrintScreen.TargetDir)appicon.ico"
+                  KeyPath="yes"/>
+         </Component>
+         <Component Id="C.PrintScreenAutoStart" Guid="EA9EDAD0-94E4-11E1-B2FF-69796188709B">
+            <Registry Id="RST.PrintScreen" Root="HKMU" Action="write"
+                      Key="Software\Microsoft\Windows\CurrentVersion\Run"
+                      Name="Miniature Bear"
+                      Value="[INSTALLFOLDER]PrintScreen.exe"
+                      Type="string" />
+         </Component>
+      </DirectoryRef>
+	</Fragment>
+</Wix>
