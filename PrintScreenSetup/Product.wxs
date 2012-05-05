@@ -29,7 +29,6 @@
 	<Fragment>
 		<ComponentGroup Id="PrintScreenComponents" Directory="INSTALLFOLDER">
          <ComponentRef Id="C.PrintScreen.exe"/>
-         <ComponentRef Id="C.appicon.ico"/>
          <ComponentRef Id="C.PrintScreenAutoStart"/>
 		</ComponentGroup>
 
@@ -37,11 +36,6 @@
          <Component Id="C.PrintScreen.exe" Guid="9591129E-94E2-11E1-9794-8D776188709B">
             <File Id="F.PrintScreen.exe"
                   Source="$(var.PrintScreen.TargetPath)"
-                  KeyPath="yes"/>
-         </Component>
-         <Component Id="C.appicon.ico" Guid="E95AEA0C-94E3-11E1-8FB2-96786188709B">
-            <File Id="F.appicon.ico"
-                  Source="$(var.PrintScreen.TargetDir)appicon.ico"
                   KeyPath="yes"/>
          </Component>
          <Component Id="C.PrintScreenAutoStart" Guid="EA9EDAD0-94E4-11E1-B2FF-69796188709B">

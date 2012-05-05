@@ -4,6 +4,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using PrintScreen.Properties;
 
 namespace PrintScreen
 {
@@ -20,7 +21,7 @@ namespace PrintScreen
 
          icon = new NotifyIcon {
             Visible = true, 
-            Icon = new Icon("appicon.ico")
+            Icon = (Icon)Resources.ResourceManager.GetObject("appicon")
          };
 
          icon.ContextMenu = new ContextMenu(
