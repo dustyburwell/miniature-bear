@@ -67,8 +67,11 @@ namespace PrintScreen
 
          Clipboard.SetImage(screenshot);
 
+         string fileName = string.Format("snapshot_{0}.png",
+            DateTime.Now.ToString("yyyy-MM-dd_H-mm-ss"));
+
          var filePath =
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "snapshot.png");
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
          screenshot.Save(filePath, ImageFormat.Png);
       }
    }
